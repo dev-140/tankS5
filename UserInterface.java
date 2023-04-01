@@ -20,6 +20,7 @@ import java.awt.Image;
 
 import java.awt.Panel;
 import java.awt.Label;
+import javax.swing.SwingConstants;
 
 public class UserInterface extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +31,8 @@ public class UserInterface extends JFrame {
 	RoundedButton receiptBtn = new RoundedButton("Receipt");
 	RoundedButton receiptBtn1 = new RoundedButton("Receipts");
 	JPanel homePanel = new JPanel();
+	JPanel amenitiesPanel = new JPanel();
+
 	
 	JPanel panel_3 = new RoundedPanel(20, Color.white);
 	JPanel panel = new JPanel();
@@ -58,6 +61,7 @@ public class UserInterface extends JFrame {
 	public void primaryBtn(final JButton btnMain, final int posX, final int posY, final int height, final int width, JPanel sideBarPanel2) {
 		btnMain.setBackground(new Color(255, 255, 255));
 		btnMain.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		sideBarPanel.setBounds(10, 0, 208, 604);
 		sideBarPanel2.add(btnMain);
 		btnMain.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnMain.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -106,7 +110,6 @@ public class UserInterface extends JFrame {
 	
 	public void sideBar() {
 		sideBarPanel.setBackground(Color.WHITE);
-		sideBarPanel.setBounds(0, 0, 208, 604);
 		getContentPane().add(sideBarPanel);
 		sideBarPanel.setLayout(null);
 		
@@ -131,10 +134,10 @@ public class UserInterface extends JFrame {
 		primaryBtn(receiptBtn1, 25, 350, 38, 160, sideBarPanel);
 		
 		
-		
 	}
 	
 	public void borders() {
+		getContentPane().setLayout(null);
 		Panel bottomBorder = new Panel();
 		bottomBorder.setBounds(0, 581, 1212, 23);
 		getContentPane().add(bottomBorder);
@@ -179,38 +182,67 @@ public class UserInterface extends JFrame {
 	}
 	
 	public void amenitiesCards(String images, String label, int posX, int posY) {
-		JPanel panel_3 = new RoundedPanel(20, Color.white);
-		panel_3.setBounds(posX, posY, 204, 146);
-		panel.add(panel_3);
-		panel_3.setLayout(null);
+		JPanel itemPanel = new RoundedPanel(20, Color.white);
+		itemPanel.setBounds(posX, posY, 297, 189);
+		itemPanel.setLayout(null);
+		amenitiesPanel.add(itemPanel);
 		
 		
 		JLabel image = new JLabel("");
-		image.setBounds(6, 6, 192, 93);
-		panel_3.add(image);
+		image.setHorizontalAlignment(SwingConstants.CENTER);
+		image.setBounds(10, 11, 277, 143);
+		itemPanel.add(image);
 		
 		Image img = new ImageIcon(this.getClass().getResource(images)).getImage();
 		image.setIcon(new ImageIcon(img));
 		
 		JLabel lblNewLabel_5 = new JLabel(label);
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setFont(new Font("Helvetica", Font.BOLD, 20));
-		lblNewLabel_5.setBounds(16, 111, 161, 30);
-		panel_3.add(lblNewLabel_5);
+		lblNewLabel_5.setBounds(10, 155, 277, 32);
+		itemPanel.add(lblNewLabel_5);
+	}
+	
+	public void amenitiesPanel() {
+		
+		amenitiesPanel.setBounds(218, 0, 978, 582);
+		getContentPane().add(amenitiesPanel);
+		amenitiesPanel.setLayout(null);
+		
+		JLabel amenitiesHeading = new JLabel("Amenities");
+		amenitiesHeading.setFont(new Font("Dialog", Font.BOLD, 20));
+		amenitiesHeading.setBounds(58, 34, 97, 26);
+		amenitiesPanel.add(amenitiesHeading);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 163, 255));
+		panel_1.setBounds(58, 58, 45, 6);
+		amenitiesPanel.add(panel_1);
+		
+		JLabel amenitiesSubHeading = new JLabel("Perfect home with perfect space and amenities.");
+		amenitiesSubHeading.setForeground(new Color(159, 158, 158));
+		amenitiesSubHeading.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		amenitiesSubHeading.setBounds(57, 74, 273, 14);
+		amenitiesPanel.add(amenitiesSubHeading);
+		
+		amenitiesCards("/item1.png", "Swimming Pools", 139, 99);
+		amenitiesCards("/item2.png", "Indoor Fitness Area", 487, 99);
+		amenitiesCards("/item3.png", "Outdoor Playground", 10, 336);
+		amenitiesCards("/item4.png", "Billiards", 335, 336);
+		amenitiesCards("/item5.png", "Golf Course", 671, 336);
+
 	}
 	
 	public UserInterface() throws IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1212, 632);
-		getContentPane().setLayout(null);
 		
 //		border bottom
 		borders();
-		
 //		home panel
-		homePanel();
-		
+//		homePanel();
+		amenitiesPanel();
 //		side bar
 		sideBar();
-		
 	}
 }
