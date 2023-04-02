@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -30,7 +33,7 @@ public class UserInterface extends JFrame {
 	RoundedButton AmenitiesBtn = new RoundedButton("Amenities");
 	RoundedButton receiptBtn = new RoundedButton("Receipt");
 	RoundedButton receiptBtn1 = new RoundedButton("Receipts");
-	JPanel homePanel = new JPanel();
+	static JPanel homePanel = new JPanel();
 	JPanel panel_3 = new RoundedPanel(20, Color.white);
 	JPanel panel = new JPanel();
 	JPanel amenitiesPanel = new JPanel();
@@ -38,6 +41,7 @@ public class UserInterface extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -74,6 +78,32 @@ public class UserInterface extends JFrame {
 		});
 	}
 	
+	public void animatePanel(int endPosY, int posX, final JPanel homePanel2) {
+		final int startY = -100;
+		final int endY = endPosY;
+		final int x = posX;
+		
+		int delay = 20; // set the delay in milliseconds
+		final int increment = 5; // set the increment in pixels
+
+		final Timer timer = new Timer(delay, new ActionListener() {
+		    int currentY = startY;
+		    
+		    public void actionPerformed(ActionEvent e) {
+		        currentY += increment;
+		        
+		        if (currentY > endY) {
+		            currentY = endY;
+		            ((Timer) e.getSource()).stop(); // stop the timer
+		        }
+		        
+		        homePanel2.setLocation(x, currentY);
+		    }
+		});
+		
+		timer.start();
+	}
+	
 	public void sideBar() {
 		sideBarPanel.setBackground(Color.WHITE);
 		sideBarPanel.setBounds(0, 0, 208, 647);
@@ -92,7 +122,6 @@ public class UserInterface extends JFrame {
 		borderBottomHeading.setBounds(25, 73, 160, 15);
 		sideBarPanel.add(borderBottomHeading);
 		
-		
 //		sidebar btns
 		primaryBtn(homeBtn, 25, 110, 38, 160, sideBarPanel);
 		homeBtn.addMouseListener(new MouseAdapter() {
@@ -100,6 +129,7 @@ public class UserInterface extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				homePanel.setVisible(true);
 				amenitiesPanel.setVisible(false);
+				animatePanel(0, 207, homePanel);
 			}
 		});
 		
@@ -110,6 +140,7 @@ public class UserInterface extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				homePanel.setVisible(false);
 				amenitiesPanel.setVisible(true);
+				animatePanel(0, 218, amenitiesPanel);
 			}
 		});
 		primaryBtn(receiptBtn, 25, 290, 38, 160, sideBarPanel);
@@ -177,9 +208,16 @@ public class UserInterface extends JFrame {
 		border.setBackground(new Color(0, 0, 0));
 		border.setBounds(119, 32, 93, 2);
 		prodCardSmallPanel.add(border);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBounds(737, 0, 268, 626);
+		homePanel.add(panel_1);
 	}
 	
 	public void homePanel() {
+		animatePanel(0, 207, homePanel);
+		
 		JLabel homeHeading = new JLabel("Check our rooms");
 		homeHeading.setFont(new Font("Helvetica", Font.BOLD, 20));
 		homeHeading.setBounds(58, 34, 170, 21);
@@ -205,7 +243,7 @@ public class UserInterface extends JFrame {
 		
 		homePanel.setBorder(null);
 		homePanel.setBackground(new Color(240, 239, 239));
-		homePanel.setBounds(207, 0, 724, 647);
+		homePanel.setBounds(207, 0, 1005, 647);
 		getContentPane().add(homePanel);
 		homePanel.setLayout(null);
 		
