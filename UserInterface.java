@@ -34,6 +34,8 @@ public class UserInterface extends JFrame {
 	JPanel panel_3 = new RoundedPanel(20, Color.white);
 	JPanel panel = new JPanel();
 	JPanel amenitiesPanel = new JPanel();
+	
+	JPanel roomsPanel = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -58,6 +60,7 @@ public class UserInterface extends JFrame {
 	public void primaryBtn(final JButton btnMain, final int posX, final int posY, final int height, final int width, JPanel sideBarPanel2) {
 		btnMain.setBackground(new Color(255, 255, 255));
 		btnMain.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		sideBarPanel.setBounds(0, 0, 208, 647);
 		sideBarPanel2.add(btnMain);
 		btnMain.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnMain.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -76,7 +79,6 @@ public class UserInterface extends JFrame {
 	
 	public void sideBar() {
 		sideBarPanel.setBackground(Color.WHITE);
-		sideBarPanel.setBounds(0, 0, 208, 647);
 		getContentPane().add(sideBarPanel);
 		sideBarPanel.setLayout(null);
 		
@@ -100,22 +102,34 @@ public class UserInterface extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				homePanel.setVisible(true);
 				amenitiesPanel.setVisible(false);
+				roomsPanel.setVisible(false);
 			}
 		});
 		
 		primaryBtn(roomsBtn, 25, 170, 38, 160, sideBarPanel);
+		roomsBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				homePanel.setVisible(false);
+				amenitiesPanel.setVisible(false);
+				roomsPanel.setVisible(true);
+			}
+		});
 		primaryBtn(AmenitiesBtn, 25, 230, 38, 160, sideBarPanel);
 		AmenitiesBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				homePanel.setVisible(false);
+				roomsPanel.setVisible(false);
 				amenitiesPanel.setVisible(true);
 			}
 		});
 		primaryBtn(receiptBtn, 25, 290, 38, 160, sideBarPanel);
+		
 	}
 	
 	public void borders() {
+		getContentPane().setLayout(null);
 		Panel bottomBorder = new Panel();
 		bottomBorder.setBounds(0, 624, 1212, 23);
 		getContentPane().add(bottomBorder);
@@ -235,25 +249,25 @@ public class UserInterface extends JFrame {
 	}
 	
 	public void amenitiesCards(String images, String label, int posX, int posY) {
-		JPanel itemPanel = new RoundedPanel(20, Color.white);
-		itemPanel.setBounds(posX, posY, 297, 189);
-		itemPanel.setLayout(null);
-		amenitiesPanel.add(itemPanel);
+		JPanel amenitiesCardPanel = new RoundedPanel(20, Color.white);
+		amenitiesCardPanel.setBounds(posX, posY, 297, 189);
+		amenitiesCardPanel.setLayout(null);
+		amenitiesPanel.add(amenitiesCardPanel);
 		
 		
-		JLabel image = new JLabel("");
-		image.setHorizontalAlignment(SwingConstants.CENTER);
-		image.setBounds(10, 11, 277, 143);
-		itemPanel.add(image);
+		JLabel amenitiesCardImg = new JLabel("");
+		amenitiesCardImg.setHorizontalAlignment(SwingConstants.CENTER);
+		amenitiesCardImg.setBounds(10, 11, 277, 143);
+		amenitiesCardPanel.add(amenitiesCardImg);
 		
 		Image img = new ImageIcon(this.getClass().getResource(images)).getImage();
-		image.setIcon(new ImageIcon(img));
+		amenitiesCardImg.setIcon(new ImageIcon(img));
 		
-		JLabel lblNewLabel_5 = new JLabel(label);
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_5.setFont(new Font("Helvetica", Font.BOLD, 20));
-		lblNewLabel_5.setBounds(10, 155, 277, 32);
-		itemPanel.add(lblNewLabel_5);
+		JLabel amenitiesCardName = new JLabel(label);
+		amenitiesCardName.setHorizontalAlignment(SwingConstants.CENTER);
+		amenitiesCardName.setFont(new Font("Helvetica", Font.BOLD, 20));
+		amenitiesCardName.setBounds(10, 155, 277, 32);
+		amenitiesCardPanel.add(amenitiesCardName);
 	}
 	
 	public void amenitiesPanel() {	
@@ -266,10 +280,10 @@ public class UserInterface extends JFrame {
 		amenitiesHeading.setBounds(58, 34, 118, 26);
 		amenitiesPanel.add(amenitiesHeading);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(0, 163, 255));
-		panel_1.setBounds(58, 58, 45, 6);
-		amenitiesPanel.add(panel_1);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 163, 255));
+		panel.setBounds(58, 58, 45, 6);
+		amenitiesPanel.add(panel);
 		
 		JLabel amenitiesSubHeading = new JLabel("Perfect home with perfect space and amenities.");
 		amenitiesSubHeading.setForeground(new Color(159, 158, 158));
@@ -277,6 +291,7 @@ public class UserInterface extends JFrame {
 		amenitiesSubHeading.setBounds(57, 74, 273, 14);
 		amenitiesPanel.add(amenitiesSubHeading);
 		
+	// amenities cards
 		amenitiesCards("/item1.png", "Swimming Pools", 139, 99);
 		amenitiesCards("/item2.png", "Indoor Fitness Area", 487, 99);
 		amenitiesCards("/item3.png", "Outdoor Playground", 10, 336);
@@ -285,21 +300,77 @@ public class UserInterface extends JFrame {
 
 	}
 	
+	public void roomsCards(String image, String roomName, String roomPrice, int posX, int posY) {
+		JPanel roomsCardPanel = new RoundedPanel(20, Color.white);
+		roomsCardPanel.setBounds(posX, posY, 192, 235);
+		roomsPanel.add(roomsCardPanel);
+		roomsCardPanel.setLayout(null);
+		
+		JLabel roomsCardImg = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource(image)).getImage();
+		roomsCardImg.setIcon(new ImageIcon(img));
+		roomsCardImg.setBounds(10, 7, 172, 140);
+		roomsCardPanel.add(roomsCardImg);
+		
+		JLabel roomsCardName = new JLabel(roomName);
+		roomsCardName.setFont(new Font("Helvetica", Font.BOLD, 15));
+		roomsCardName.setHorizontalAlignment(SwingConstants.CENTER);
+		roomsCardName.setBounds(45, 150, 108, 24);
+		roomsCardPanel.add(roomsCardName);
+		
+		JLabel roomsCardPrice = new JLabel(roomPrice);
+		roomsCardPrice.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		roomsCardPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		roomsCardPrice.setBounds(45, 175, 108, 24);
+		roomsCardPanel.add(roomsCardPrice);
+		
+		
+		RoundedButton roomsCardBtn = new RoundedButton("View");
+		roomsCardBtn.setBackground(new Color(255, 255, 255));
+		roomsCardBtn.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		roomsCardBtn.setBounds(55, 201, 89, 23);
+		roomsCardPanel.add(roomsCardBtn);
+	}
+	
+	public void roomsPanel() {
+		
+		roomsPanel.setBounds(208, 0, 700, 625);
+		getContentPane().add(roomsPanel);
+		roomsPanel.setLayout(null);
+		
+		JLabel roomsHeading = new JLabel("Available Rooms");
+		roomsHeading.setFont(new Font("Dialog", Font.BOLD, 20));
+		roomsHeading.setBounds(57, 22, 163, 20);
+		roomsPanel.add(roomsHeading);
+		
+		JPanel panel_blue = new JPanel();
+		panel_blue.setBackground(new Color(0, 163, 255));
+		panel_blue.setBounds(57, 43, 70, 6);
+		roomsPanel.add(panel_blue);
+		
+		roomsCards("/room1.jpg", "Single Room", "P 1,000 / Night", 57, 80);
+		roomsCards("/room1.jpg", "Double Room", "P 2,000 / Night", 270, 80);
+		roomsCards("/room1.jpg", "Triple Room", "P 3,000 / Night", 485, 80);
+		roomsCards("/room1.jpg", "Single Room", "P 1,000 / Night", 57, 339);
+		roomsCards("/room1.jpg", "Double Room", "P 2,000 / Night", 270, 339);
+		roomsCards("/room1.jpg", "Triple Room", "P 3,000 / Night", 485, 339);
+
+	}
+	
 	public UserInterface() throws IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1212, 675);
-		getContentPane().setLayout(null);
 		
 //		border bottom
 		borders();
-		
 //		home panel
 		homePanel();
-		
 //		amenities panel
 		amenitiesPanel();
 		amenitiesPanel.setVisible(false);
-		
+//		rooms panel
+		roomsPanel();
+		roomsPanel.setVisible(false);
 //		side bar
 		sideBar();
 		
