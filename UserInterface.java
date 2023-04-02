@@ -129,6 +129,8 @@ public class UserInterface extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				homePanel.setVisible(true);
 				amenitiesPanel.setVisible(false);
+				roomsPanel.setVisible(false);
+				animatePanel(0, 207, homePanel);
 			}
 		});
 		
@@ -148,6 +150,8 @@ public class UserInterface extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				homePanel.setVisible(false);
 				amenitiesPanel.setVisible(true);
+				roomsPanel.setVisible(false);
+				animatePanel(0, 218, amenitiesPanel);
 			}
 		});
 		primaryBtn(receiptBtn, 25, 290, 38, 160, sideBarPanel);
