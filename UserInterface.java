@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -30,16 +33,15 @@ public class UserInterface extends JFrame {
 	RoundedButton AmenitiesBtn = new RoundedButton("Amenities");
 	RoundedButton receiptBtn = new RoundedButton("Receipt");
 	RoundedButton receiptBtn1 = new RoundedButton("Receipts");
-	JPanel homePanel = new JPanel();
+	static JPanel homePanel = new JPanel();
 	JPanel panel_3 = new RoundedPanel(20, Color.white);
 	JPanel panel = new JPanel();
 	JPanel amenitiesPanel = new JPanel();
-	
 	JPanel roomsPanel = new JPanel();
-
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -60,7 +62,6 @@ public class UserInterface extends JFrame {
 	public void primaryBtn(final JButton btnMain, final int posX, final int posY, final int height, final int width, JPanel sideBarPanel2) {
 		btnMain.setBackground(new Color(255, 255, 255));
 		btnMain.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		sideBarPanel.setBounds(0, 0, 208, 647);
 		sideBarPanel2.add(btnMain);
 		btnMain.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnMain.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -77,8 +78,35 @@ public class UserInterface extends JFrame {
 		});
 	}
 	
+	public void animatePanel(int endPosY, int posX, final JPanel homePanel2) {
+		final int startY = -100;
+		final int endY = endPosY;
+		final int x = posX;
+		
+		int delay = 20; // set the delay in milliseconds
+		final int increment = 5; // set the increment in pixels
+
+		final Timer timer = new Timer(delay, new ActionListener() {
+		    int currentY = startY;
+		    
+		    public void actionPerformed(ActionEvent e) {
+		        currentY += increment;
+		        
+		        if (currentY > endY) {
+		            currentY = endY;
+		            ((Timer) e.getSource()).stop(); // stop the timer
+		        }
+		        
+		        homePanel2.setLocation(x, currentY);
+		    }
+		});
+		
+		timer.start();
+	}
+	
 	public void sideBar() {
 		sideBarPanel.setBackground(Color.WHITE);
+		sideBarPanel.setBounds(0, 0, 208, 647);
 		getContentPane().add(sideBarPanel);
 		sideBarPanel.setLayout(null);
 		
@@ -94,7 +122,6 @@ public class UserInterface extends JFrame {
 		borderBottomHeading.setBounds(25, 73, 160, 15);
 		sideBarPanel.add(borderBottomHeading);
 		
-		
 //		sidebar btns
 		primaryBtn(homeBtn, 25, 110, 38, 160, sideBarPanel);
 		homeBtn.addMouseListener(new MouseAdapter() {
@@ -103,6 +130,7 @@ public class UserInterface extends JFrame {
 				homePanel.setVisible(true);
 				amenitiesPanel.setVisible(false);
 				roomsPanel.setVisible(false);
+				animatePanel(0, 207, homePanel);
 			}
 		});
 		
@@ -113,6 +141,7 @@ public class UserInterface extends JFrame {
 				homePanel.setVisible(false);
 				amenitiesPanel.setVisible(false);
 				roomsPanel.setVisible(true);
+				animatePanel(0, 208, roomsPanel);
 			}
 		});
 		primaryBtn(AmenitiesBtn, 25, 230, 38, 160, sideBarPanel);
@@ -120,16 +149,15 @@ public class UserInterface extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				homePanel.setVisible(false);
-				roomsPanel.setVisible(false);
 				amenitiesPanel.setVisible(true);
+				roomsPanel.setVisible(false);
+				animatePanel(0, 218, amenitiesPanel);
 			}
 		});
 		primaryBtn(receiptBtn, 25, 290, 38, 160, sideBarPanel);
-		
 	}
 	
 	public void borders() {
-		getContentPane().setLayout(null);
 		Panel bottomBorder = new Panel();
 		bottomBorder.setBounds(0, 624, 1212, 23);
 		getContentPane().add(bottomBorder);
@@ -191,9 +219,16 @@ public class UserInterface extends JFrame {
 		border.setBackground(new Color(0, 0, 0));
 		border.setBounds(119, 32, 93, 2);
 		prodCardSmallPanel.add(border);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBounds(737, 0, 268, 626);
+		homePanel.add(panel_1);
 	}
 	
 	public void homePanel() {
+		animatePanel(0, 207, homePanel);
+		
 		JLabel homeHeading = new JLabel("Check our rooms");
 		homeHeading.setFont(new Font("Helvetica", Font.BOLD, 20));
 		homeHeading.setBounds(58, 34, 170, 21);
@@ -219,7 +254,7 @@ public class UserInterface extends JFrame {
 		
 		homePanel.setBorder(null);
 		homePanel.setBackground(new Color(240, 239, 239));
-		homePanel.setBounds(207, 0, 724, 647);
+		homePanel.setBounds(207, 0, 1005, 647);
 		getContentPane().add(homePanel);
 		homePanel.setLayout(null);
 		
@@ -249,25 +284,25 @@ public class UserInterface extends JFrame {
 	}
 	
 	public void amenitiesCards(String images, String label, int posX, int posY) {
-		JPanel amenitiesCardPanel = new RoundedPanel(20, Color.white);
-		amenitiesCardPanel.setBounds(posX, posY, 297, 189);
-		amenitiesCardPanel.setLayout(null);
-		amenitiesPanel.add(amenitiesCardPanel);
+		JPanel itemPanel = new RoundedPanel(20, Color.white);
+		itemPanel.setBounds(posX, posY, 297, 189);
+		itemPanel.setLayout(null);
+		amenitiesPanel.add(itemPanel);
 		
 		
-		JLabel amenitiesCardImg = new JLabel("");
-		amenitiesCardImg.setHorizontalAlignment(SwingConstants.CENTER);
-		amenitiesCardImg.setBounds(10, 11, 277, 143);
-		amenitiesCardPanel.add(amenitiesCardImg);
+		JLabel image = new JLabel("");
+		image.setHorizontalAlignment(SwingConstants.CENTER);
+		image.setBounds(10, 11, 277, 143);
+		itemPanel.add(image);
 		
 		Image img = new ImageIcon(this.getClass().getResource(images)).getImage();
-		amenitiesCardImg.setIcon(new ImageIcon(img));
+		image.setIcon(new ImageIcon(img));
 		
-		JLabel amenitiesCardName = new JLabel(label);
-		amenitiesCardName.setHorizontalAlignment(SwingConstants.CENTER);
-		amenitiesCardName.setFont(new Font("Helvetica", Font.BOLD, 20));
-		amenitiesCardName.setBounds(10, 155, 277, 32);
-		amenitiesCardPanel.add(amenitiesCardName);
+		JLabel lblNewLabel_5 = new JLabel(label);
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setFont(new Font("Helvetica", Font.BOLD, 20));
+		lblNewLabel_5.setBounds(10, 155, 277, 32);
+		itemPanel.add(lblNewLabel_5);
 	}
 	
 	public void amenitiesPanel() {	
@@ -280,10 +315,10 @@ public class UserInterface extends JFrame {
 		amenitiesHeading.setBounds(58, 34, 118, 26);
 		amenitiesPanel.add(amenitiesHeading);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 163, 255));
-		panel.setBounds(58, 58, 45, 6);
-		amenitiesPanel.add(panel);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 163, 255));
+		panel_1.setBounds(58, 58, 45, 6);
+		amenitiesPanel.add(panel_1);
 		
 		JLabel amenitiesSubHeading = new JLabel("Perfect home with perfect space and amenities.");
 		amenitiesSubHeading.setForeground(new Color(159, 158, 158));
@@ -291,7 +326,6 @@ public class UserInterface extends JFrame {
 		amenitiesSubHeading.setBounds(57, 74, 273, 14);
 		amenitiesPanel.add(amenitiesSubHeading);
 		
-	// amenities cards
 		amenitiesCards("/item1.png", "Swimming Pools", 139, 99);
 		amenitiesCards("/item2.png", "Indoor Fitness Area", 487, 99);
 		amenitiesCards("/item3.png", "Outdoor Playground", 10, 336);
@@ -360,6 +394,7 @@ public class UserInterface extends JFrame {
 	public UserInterface() throws IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1212, 675);
+		getContentPane().setLayout(null);
 		
 //		border bottom
 		borders();
