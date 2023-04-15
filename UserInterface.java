@@ -315,10 +315,10 @@ public class UserInterface extends JFrame {
 		amenitiesHeading.setBounds(58, 34, 118, 26);
 		amenitiesPanel.add(amenitiesHeading);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(0, 163, 255));
-		panel_1.setBounds(58, 58, 45, 6);
-		amenitiesPanel.add(panel_1);
+		JPanel heading_blue = new JPanel();
+		heading_blue.setBackground(new Color(0, 163, 255));
+		heading_blue.setBounds(58, 58, 45, 6);
+		amenitiesPanel.add(heading_blue);
 		
 		JLabel amenitiesSubHeading = new JLabel("Perfect home with perfect space and amenities.");
 		amenitiesSubHeading.setForeground(new Color(159, 158, 158));
