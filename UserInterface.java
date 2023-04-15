@@ -358,7 +358,6 @@ public class UserInterface extends JFrame {
 		roomsCardPrice.setBounds(45, 175, 108, 24);
 		roomsCardPanel.add(roomsCardPrice);
 		
-		
 		RoundedButton roomsCardBtn = new RoundedButton("View");
 		roomsCardBtn.setBackground(new Color(255, 255, 255));
 		roomsCardBtn.setFont(new Font("Helvetica", Font.PLAIN, 13));
