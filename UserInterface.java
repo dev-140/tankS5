@@ -270,7 +270,7 @@ public class UserInterface extends JFrame {
 		prodCardsSmall("Single Room", "P1,000 / Night", "/availabel-room-test-img.png", 306, 510);
 		
 //		room info
-		roomInfo();
+		roomInfo("Single Room", "/sample-image-room-info.png", "Floor: 1st", "Room number: 1", "Price: 1,000 / night", "A single room in a hotel is a comfortable and cozy space designed for a single occupant, featuring a single bed, basic amenities, and a functional layout.");
 	}
 
 //	amenities cards
@@ -379,11 +379,10 @@ public class UserInterface extends JFrame {
 		roomsCards("/room1.jpg", "Single Room", "P 1,000 / Night", 57, 339);
 		roomsCards("/room1.jpg", "Double Room", "P 2,000 / Night", 270, 339);
 		roomsCards("/room1.jpg", "Triple Room", "P 3,000 / Night", 485, 339);
-
 	}
 	
 //	room info
-	public void roomInfo() {
+	public void roomInfo(String roomLabel, String roomImage, String floorNumber, String roomNo, String roomPrice, String roomDesc) {
 		JPanel infoSidePanel = new JPanel();
 		infoSidePanel.setBackground(new Color(255, 255, 255));
 		infoSidePanel.setBounds(737, 0, 268, 626);
@@ -396,7 +395,7 @@ public class UserInterface extends JFrame {
 		roomInfoHeading.setBounds(6, 18, 256, 28);
 		infoSidePanel.add(roomInfoHeading);
 
-		JLabel roomInfoLabel = new JLabel("Single room");
+		JLabel roomInfoLabel = new JLabel(roomLabel);
 		roomInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		roomInfoLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
 		roomInfoLabel.setBounds(6, 66, 256, 28);
@@ -411,15 +410,15 @@ public class UserInterface extends JFrame {
 		roomInfoImage.setBounds(16, 106, 235, 140);
 		infoSidePanel.add(roomInfoImage);
 
-		Image image = new ImageIcon(this.getClass().getResource("/sample-image-room-info.png")).getImage();
+		Image image = new ImageIcon(this.getClass().getResource(roomImage)).getImage();
 		roomInfoImage.setIcon(new ImageIcon(image));
 		
-		JLabel floorInfo = new JLabel("Floor: 1st");
+		JLabel floorInfo = new JLabel(floorNumber);
 		floorInfo.setFont(new Font("Helvetica", Font.BOLD, 15));
 		floorInfo.setBounds(16, 272, 92, 16);
 		infoSidePanel.add(floorInfo);
 		
-		JLabel roomNumber = new JLabel("Room number: 1");
+		JLabel roomNumber = new JLabel(roomNo);
 		roomNumber.setFont(new Font("Helvetica", Font.BOLD, 15));
 		roomNumber.setBounds(125, 272, 126, 16);
 		infoSidePanel.add(roomNumber);
@@ -436,7 +435,7 @@ public class UserInterface extends JFrame {
 		infoSidePanel.add(roomInfoPriceBg);
 		roomInfoPriceBg.setLayout(null);
 		
-		JLabel roomInfoPrice = new JLabel("Price: 1,000 / night");
+		JLabel roomInfoPrice = new JLabel(roomPrice);
 		roomInfoPrice.setForeground(new Color(255, 255, 255));
 		roomInfoPrice.setFont(new Font("Helvetica", Font.BOLD, 13));
 		roomInfoPrice.setHorizontalAlignment(SwingConstants.CENTER);
@@ -447,7 +446,7 @@ public class UserInterface extends JFrame {
 		txtSingleRoom.setForeground(new Color(126, 126, 126));
 		txtSingleRoom.setEditable(false);
 		txtSingleRoom.setFont(new Font("Helvetica", Font.PLAIN, 15));
-		txtSingleRoom.setText("A single room in a hotel is a comfortable and cozy space designed for a single occupant, featuring a single bed, basic amenities, and a functional layout.");
+		txtSingleRoom.setText(roomDesc);
 		txtSingleRoom.setBounds(16, 352, 235, 110);
 		infoSidePanel.add(txtSingleRoom);
 		StyledDocument doc =  txtSingleRoom.getStyledDocument();
