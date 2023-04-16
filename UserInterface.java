@@ -2,27 +2,12 @@ package main;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.Cursor;
-
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.text.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Panel;
-import java.awt.Label;
 
 public class UserInterface extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -59,11 +44,10 @@ public class UserInterface extends JFrame {
 	 * Create the frame.
 	 */
 
-	public void primaryBtn(final JButton btnMain, final int posX, final int posY, final int height, final int width,
-			JPanel sideBarPanel2) {
+	public static void primaryBtn(final JButton btnMain, final int posX, final int posY, final int height, final int width, JPanel jPanel2) {
 		btnMain.setBackground(new Color(255, 255, 255));
 		btnMain.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		sideBarPanel2.add(btnMain);
+		jPanel2.add(btnMain);
 		btnMain.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnMain.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnMain.setBounds(posX, posY, width, height);
@@ -284,6 +268,9 @@ public class UserInterface extends JFrame {
 		prodCardsSmall("Single Room", "P1,000 / Night", "/availabel-room-test-img.png", 306, 423);
 		prodCardsSmall("Single Room", "P1,000 / Night", "/availabel-room-test-img.png", 58, 510);
 		prodCardsSmall("Single Room", "P1,000 / Night", "/availabel-room-test-img.png", 306, 510);
+		
+//		room info
+		roomInfo();
 	}
 
 //	amenities cards
@@ -338,6 +325,7 @@ public class UserInterface extends JFrame {
 
 	}
 
+//	room cards
 	public void roomsCards(String image, String roomName, String roomPrice, int posX, int posY) {
 		JPanel roomsCardPanel = new RoundedPanel(20, Color.white);
 		roomsCardPanel.setBounds(posX, posY, 192, 235);
@@ -369,8 +357,8 @@ public class UserInterface extends JFrame {
 		roomsCardPanel.add(roomsCardBtn);
 	}
 
+//	home panel
 	public void roomsPanel() {
-
 		roomsPanel.setBounds(208, 0, 700, 625);
 		getContentPane().add(roomsPanel);
 		roomsPanel.setLayout(null);
@@ -393,29 +381,9 @@ public class UserInterface extends JFrame {
 		roomsCards("/room1.jpg", "Triple Room", "P 3,000 / Night", 485, 339);
 
 	}
-
-	public UserInterface() throws IOException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1212, 675);
-		getContentPane().setLayout(null);
-
-//		border bottom
-		borders();
-
-//		home panel
-		homePanel();
-
-//		amenities panel
-		amenitiesPanel();
-		amenitiesPanel.setVisible(false);
-
-//		rooms panel
-		roomsPanel();
-		roomsPanel.setVisible(false);
-
-//		side bar
-		sideBar();
-
+	
+//	room info
+	public void roomInfo() {
 		JPanel infoSidePanel = new JPanel();
 		infoSidePanel.setBackground(new Color(255, 255, 255));
 		infoSidePanel.setBounds(737, 0, 268, 626);
@@ -435,7 +403,7 @@ public class UserInterface extends JFrame {
 		infoSidePanel.add(roomInfoLabel);
 
 		JPanel headingBorder = new JPanel();
-		headingBorder.setBackground(new Color(160, 160, 160));
+		headingBorder.setBackground(new Color(0, 163, 255));
 		headingBorder.setBounds(46, 47, 170, 10);
 		infoSidePanel.add(headingBorder);
 
@@ -445,6 +413,77 @@ public class UserInterface extends JFrame {
 
 		Image image = new ImageIcon(this.getClass().getResource("/sample-image-room-info.png")).getImage();
 		roomInfoImage.setIcon(new ImageIcon(image));
+		
+		JLabel floorInfo = new JLabel("Floor: 1st");
+		floorInfo.setFont(new Font("Helvetica", Font.BOLD, 15));
+		floorInfo.setBounds(16, 272, 92, 16);
+		infoSidePanel.add(floorInfo);
+		
+		JLabel roomNumber = new JLabel("Room number: 1");
+		roomNumber.setFont(new Font("Helvetica", Font.BOLD, 15));
+		roomNumber.setBounds(125, 272, 126, 16);
+		infoSidePanel.add(roomNumber);
+		
+		JPanel roomBottomBorder = new JPanel();
+		roomBottomBorder.setBackground(new Color(0, 0, 0));
+		roomBottomBorder.setBounds(109, 272, 4, 16);
+		infoSidePanel.add(roomBottomBorder);
+		
+		Color custom = Color.decode("#00A3FF");
+		JPanel roomInfoPriceBg = new RoundedPanel(20, custom);
+		roomInfoPriceBg.setBackground(new Color(255, 255, 255));
+		roomInfoPriceBg.setBounds(46, 300, 181, 36);
+		infoSidePanel.add(roomInfoPriceBg);
+		roomInfoPriceBg.setLayout(null);
+		
+		JLabel roomInfoPrice = new JLabel("Price: 1,000 / night");
+		roomInfoPrice.setForeground(new Color(255, 255, 255));
+		roomInfoPrice.setFont(new Font("Helvetica", Font.BOLD, 13));
+		roomInfoPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		roomInfoPrice.setBounds(6, 6, 169, 24);
+		roomInfoPriceBg.add(roomInfoPrice);
+		
+		JTextPane txtSingleRoom = new JTextPane();
+		txtSingleRoom.setForeground(new Color(126, 126, 126));
+		txtSingleRoom.setEditable(false);
+		txtSingleRoom.setFont(new Font("Helvetica", Font.PLAIN, 15));
+		txtSingleRoom.setText("A single room in a hotel is a comfortable and cozy space designed for a single occupant, featuring a single bed, basic amenities, and a functional layout.");
+		txtSingleRoom.setBounds(16, 352, 235, 110);
+		infoSidePanel.add(txtSingleRoom);
+		StyledDocument doc =  txtSingleRoom.getStyledDocument();
+		SimpleAttributeSet center = new SimpleAttributeSet();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
+		
+		RoundedButton viewBtn = new RoundedButton("View");
+		RoundedButton bookBtn = new RoundedButton("Book now");
+		
+		primaryBtn(viewBtn, 46, 470, 38, 181, infoSidePanel);
+		primaryBtn(bookBtn, 46, 518, 38, 181, infoSidePanel);
+	}
+
+	public UserInterface() throws IOException {
+//		Resources.main(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1212, 675);
+		getContentPane().setLayout(null);
+
+//		border bottom
+		borders();
+		
+//		home panel
+		homePanel();
+
+//		amenities panel
+		amenitiesPanel();
+		amenitiesPanel.setVisible(false);
+
+//		rooms panel
+		roomsPanel();
+		roomsPanel.setVisible(false);
+
+//		side bar
+		sideBar();
 
 	}
 }
