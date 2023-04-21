@@ -479,17 +479,16 @@ public class UserInterface extends JFrame {
 
 		RoundedButton viewBtn = new RoundedButton("View");
 		primaryBtn(viewBtn, 46, 470, 38, 181, infoSidePanel);
-		if (panel == "roomPanel") {
-			viewBtn.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
-					homePanel.setVisible(false);
-					amenitiesPanel.setVisible(false);
-					roomsPanel.setVisible(false);
-					modalBg.setVisible(true);
-				}
-				
-			});
-		}
+		viewBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				homePanel.setVisible(false);
+				amenitiesPanel.setVisible(false);
+				roomsPanel.setVisible(false);
+				infoSidePanel.setVisible(false);
+				modalBg.setVisible(true);
+			}
+			
+		});
 		
 		RoundedButton bookBtn = new RoundedButton("Book now");
 		primaryBtn(bookBtn, 46, 518, 38, 181, infoSidePanel);
@@ -516,11 +515,11 @@ public class UserInterface extends JFrame {
 		closeModalBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				roomsPanel.setVisible(true);
+				infoSidePanel.setVisible(true);
 				modalBg.setVisible(false);
 			}
 		});
 		
-
 		closeModalBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				roomsPanel.setVisible(true);
