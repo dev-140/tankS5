@@ -10,14 +10,34 @@
 
 -   data.json (Put it in your local folder)
 
+-   transaction-data.json (Put it in your local folder)
+
 ### Step 2:
 
--   Locate the data.json file path example "/Users/rox/Documents/folders/test-json/data.json"
+#### Add dependencies to pom.xml file
+
+-   Link for dependencies https://github.com/dev-140/tankS5/blob/rox/dependencies
+
+-   Example Screenshot
+
+![Screenshot](https://i.ibb.co/NWXyx7L/Screen-Shot-2023-04-21-at-3-11-29-PM.png)
 
 ### Step 3:
 
--   Paste the file path on reader variable located in ReadJson.java file
+#### Locate file paths
+
+-   Locate the data.json file path, example: "/Users/rox/Documents/folders/test-json/data.json"
+
+-   Locate the transaction-data.json file path, example: "/Users/rox/Documents/folders/test-json/transaction-data.json"
+
+### Step 4:
+
+#### Paste the file paths
+
+-   Paste the file path of data.json on [reader] variable located in ReadJson.java file.
+
+-   Paste the file path of transaction-data.json on [filePath] variable located in WriteJson.java file.
 
 ##
 
-## Use this link to see JSON visually https://jsoncrack.com/editor
+#### You can use this link to see JSON data visually https://jsoncrack.com/editor
