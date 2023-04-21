@@ -1,0 +1,62 @@
+[
+	{
+		"room": "singleRoom",
+		"roomName": "Single Room",
+		"price": 1000,
+		"priceS": "P1,000 - Nights",
+		"desc": "Our cozy single rooms provide a comfortable and affordable accommodation option for solo travelers. Each room is equipped with essential amenities to ensure a pleasant stay",
+		"feature": [
+			"Comfortable Bed",
+			"Private Bathroom",
+			"Essential Amenities"
+		],
+		"images": {
+			"smallImageIcon": "/single-small-image-icon.png",
+			"heroIcon": "/single-hero-icon.png",
+			"otherImageInfo": "/single-info-more-image.png",
+			"dummyheroIcon": "/sample-image-room-info.png"
+		}
+	},
+	{
+		"room": "doubleRoom",
+		"roomName": "Double Room",
+		"price": 2000,
+		"priceS": "P2,000 - Night",
+		"desc": "A double room is a type of accommodation designed for two people with a double-sized bed and various amenities, commonly preferred by couples or friends traveling together. These rooms are available in hotels or rental apartments, and offer a comfortable and affordable option for those seeking a shared space.",
+		"feature": ["Double Bed", "En-suite Bathroom", "Entertainment Options"],
+		"images": {
+			"smallImageIcon": "/double-small-image-icon.png",
+			"heroIcon": "/double-hero-icon.png",
+			"otherImageInfo": "/double-info-more-image.png",
+			"dummyheroIcon": "/sample-image-room-info.png"
+		}
+	},
+	{
+		"room": "tripleRoom",
+		"roomName": "Triple Room",
+		"price": 3000,
+		"priceS": "P3,000 - Night",
+		"desc": "Triple rooms in hotels are designed for three people and offer a comfortable and affordable option for those seeking shared accommodation. They typically feature a double bed and an extra single bed, along with essential amenities like an en-suite bathroom, entertainment options, desk space, and wardrobe storage.",
+		"feature": ["Double Bed", "En-suite Bathroom", "Entertainment Options"],
+		"images": {
+			"smallImageIcon": "/triple-small-image-icon.png",
+			"heroIcon": "/triple-hero-icon.png",
+			"otherImageInfo": "/triple-info-more-image.png",
+			"dummyheroIcon": "/sample-image-room-info.png"
+		}
+	},
+	{
+		"room": "sampleRoom",
+		"roomName": "Sample Room",
+		"price": 4000,
+		"priceS": "P4,000 - Night",
+		"desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ex",
+		"feature": ["Sample Bed", "En-suite Bathroom", "Entertainment Options"],
+		"images": {
+			"smallImageIcon": "/triple-small-image-icon.png",
+			"heroIcon": "/triple-hero-icon.png",
+			"otherImageInfo": "/triple-info-more-image.png",
+			"dummyheroIcon": "/sample-image-room-info.png"
+		}
+	}
+]
