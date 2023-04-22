@@ -510,23 +510,6 @@ public class UserInterface extends JFrame {
 	    roomModal.setBackground(new Color(255, 255, 255));
 	    roomModal.setLayout(null);
 		
-		JButton closeModalBtn = new RoundedButton("Close");
-		primaryBtn(closeModalBtn, 308, 387, 38, 160, roomModal);
-		closeModalBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				roomsPanel.setVisible(true);
-				infoSidePanel.setVisible(true);
-				modalBg.setVisible(false);
-			}
-		});
-		
-		closeModalBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				roomsPanel.setVisible(true);
-				modalBg.setVisible(false);
-			}
-		});
-		
 		JLabel lblNewLabel = new JLabel("Room Info");
 		lblNewLabel.setFont(new Font("Helvetica", Font.BOLD, 24));
 		lblNewLabel.setBounds(41, 21, 128, 45);
@@ -604,10 +587,27 @@ public class UserInterface extends JFrame {
 		feature2.setBounds(308, 346, 156, 16);
 		roomModal.add(feature2);
 		
-		JLabel feature_2 = new JLabel("- Lorem ipsum");
-		feature_2.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		feature_2.setBounds(308, 346, 156, 16);
-		modalBg.add(feature_2);
+		JLabel feature3 = new JLabel("- Lorem ipsum");
+		feature3.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		feature3.setBounds(308, 346, 156, 16);
+		modalBg.add(feature3);
+		
+		JButton closeModalBtn = new RoundedButton("Close");
+		primaryBtn(closeModalBtn, 308, 387, 38, 160, roomModal);
+		closeModalBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				roomsPanel.setVisible(true);
+				infoSidePanel.setVisible(true);
+				modalBg.setVisible(false);
+			}
+		});
+		
+		closeModalBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				roomsPanel.setVisible(true);
+				modalBg.setVisible(false);
+			}
+		});
 	}
 	
 	public UserInterface() throws IOException {
