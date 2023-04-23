@@ -1,7 +1,5 @@
 package main;
-
 import java.awt.EventQueue;
-
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.text.*;
@@ -10,6 +8,10 @@ import java.awt.event.*;
 import java.io.IOException;
 
 public class UserInterface extends JFrame {
+	
+	// change default app icon
+	ImageIcon logo = new ImageIcon(".//images//hasbullah.jpg");
+	
 	private static final long serialVersionUID = 1L;
 	JPanel sideBarPanel = new JPanel();
 	RoundedButton homeBtn = new RoundedButton("Home");
@@ -101,7 +103,6 @@ public class UserInterface extends JFrame {
 					currentY = endY;
 					((Timer) e.getSource()).stop(); // stop the timer
 				}
-
 				homePanel2.setLocation(x, currentY);
 			}
 		});
@@ -342,7 +343,6 @@ public class UserInterface extends JFrame {
 		amenitiesCards("/item3.png", "Outdoor Playground", 10, 336);
 		amenitiesCards("/item4.png", "Billiards", 335, 336);
 		amenitiesCards("/item5.png", "Golf Course", 671, 336);
-
 	}
 
 //	room cards
@@ -494,9 +494,11 @@ public class UserInterface extends JFrame {
 				modalBg.setVisible(true);
 				ReadJson.fetchData(modalSetRoom);
 				roomModalTitle.setText(ReadJson.roomFName);
-//				roomInfoLabel.setText(ReadJson.roomFName);
-//				txtRoomName.setText(ReadJson.roomDesc);
-				
+				modalRoomPrice.setText(ReadJson.roomSPrice);
+				roomInfoDesc.setText(ReadJson.roomDesc);
+				feature1.setText(ReadJson.feature1);
+				feature2.setText(ReadJson.feature2);
+				feature3.setText(ReadJson.feature3);
 			}
 		});
 //		
@@ -567,9 +569,8 @@ public class UserInterface extends JFrame {
 		modalRoomPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		modalRoomPrice.setFont(new Font("Helvetica", Font.BOLD, 13));
 		
-		
 		roomInfoDesc.setEnabled(false);
-		roomInfoDesc.setForeground(new Color(160, 160, 160));
+		roomInfoDesc.setForeground(new Color(126, 126, 126));
 		roomInfoDesc.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		roomInfoDesc.setText(ReadJson.roomDesc);
 		roomInfoDesc.setBounds(308, 164, 196, 88);
@@ -579,7 +580,6 @@ public class UserInterface extends JFrame {
 		lblNewLabel_2.setFont(new Font("Helvetica", Font.BOLD, 13));
 		lblNewLabel_2.setBounds(308, 264, 82, 16);
 		roomModal.add(lblNewLabel_2);
-		
 		
 		feature1.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		feature1.setBounds(308, 290, 156, 16);
@@ -593,7 +593,6 @@ public class UserInterface extends JFrame {
 		feature3.setBounds(308, 346, 156, 16);
 		roomModal.add(feature3);
 		
-		
 		JButton closeModalBtn = new RoundedButton("Close");
 		primaryBtn(closeModalBtn, 308, 387, 38, 160, roomModal);
 		closeModalBtn.addActionListener(new ActionListener() {
@@ -603,7 +602,7 @@ public class UserInterface extends JFrame {
 				modalBg.setVisible(false);
 			}
 		});
-		
+
 		closeModalBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				roomsPanel.setVisible(true);
@@ -613,10 +612,13 @@ public class UserInterface extends JFrame {
 	}
 	
 	public UserInterface() throws IOException {
+		
 //		Resources.main(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1212, 675);
 		getContentPane().setLayout(null);
+// 		set app icon 
+		setIconImage(logo.getImage());
 
 //		border bottom
 		borders();
