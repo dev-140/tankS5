@@ -32,7 +32,7 @@ public class UserInterface extends JFrame {
 	
 	// room modal variables
 	String modalSetRoom;
-	JLabel roomModalTitle = new JLabel("asd");
+	JLabel roomModalTitle = new JLabel();
 	JLabel feature1 = new JLabel();
 	JLabel feature2 = new JLabel();
 	JLabel feature3 = new JLabel();
@@ -493,20 +493,11 @@ public class UserInterface extends JFrame {
 				infoSidePanel.setVisible(false);
 				modalBg.setVisible(true);
 				ReadJson.fetchData(modalSetRoom);
-				
-				roomModalTitle.setText("asdasd");
-				roomInfoLabel.setText(ReadJson.roomFName);
-				txtRoomName.setText(ReadJson.roomDesc);
+				roomModalTitle.setText(ReadJson.roomFName);
+//				roomInfoLabel.setText(ReadJson.roomFName);
+//				txtRoomName.setText(ReadJson.roomDesc);
 				
 			}
-//			roomsCardBtn.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent evt) {
-//					ReadJson.fetchData(roomName);
-//					modalSetRoom = roomName;
-//					System.out.print(modalSetRoom);
-//					roomInfoPrice.setText(ReadJson.roomSPrice);
-//					roomInfoLabel.setText(ReadJson.roomFName);
-//					txtRoomName.setText(ReadJson.roomDesc);
 		});
 //		
 		RoundedButton bookBtn = new RoundedButton("Book now");
@@ -515,8 +506,6 @@ public class UserInterface extends JFrame {
 
 //	room modal
 	public void roomModal() {
-		
-	
 		Color blueCircle = new Color(0, 163, 255);
 		Image image1 = new ImageIcon(this.getClass().getResource("/sample-image-room-info.png")).getImage();
 		
@@ -546,7 +535,6 @@ public class UserInterface extends JFrame {
 		circleModal.setBounds(210, 29, 37, 37);
 		roomModal.add(circleModal);
 		
-		JLabel roomModalTitle = new JLabel();
 		roomModalTitle.setFont(new Font("Helvetica", Font.BOLD, 24));
 		roomModalTitle.setBounds(259, 31, 232, 37);
 		roomModal.add(roomModalTitle);
