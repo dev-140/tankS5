@@ -9,13 +9,13 @@ import org.json.simple.parser.ParseException;
 
 public class ReadJson {
 //	global vars
-	static String roomFName, roomSPrice, roomIconImg, roomDesc, roomHeroIcon, roomOtherImageInfo, dummyheroIcon;
+	static String roomFName, roomSPrice, roomIconImg, roomDesc, roomHeroIcon, roomOtherImageInfo, dummyheroIcon, feature1, feature2, feature3;
 	static long roomPrice;
 	
     public static void fetchData(String roomData) {
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("filepath")) {
+        try (FileReader reader = new FileReader("C:\\Users\\Jerome Pascual\\Downloads\\data.json")) {
             Object obj = jsonParser.parse(reader);
             JSONArray roomList = (JSONArray) obj;
 
@@ -37,9 +37,11 @@ public class ReadJson {
                     roomDesc = (String) room.get("desc");
                     
 //                  loop for features
-                    for (int j = 0; j < features.size(); j++) {
-                        String feature = (String) features.get(j);
-                    }
+                    
+                     feature1 = (String) features.get(0);
+                     feature2 = (String) features.get(1);
+                     feature3 = (String) features.get(2);
+                
                 }
             }
 
@@ -48,4 +50,3 @@ public class ReadJson {
         }
     }
 }
-
